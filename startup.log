@@ -1,0 +1,85 @@
+[root@wolfpass4 daos-config]# _daos_run_root
+ERROR: No command supplied; defaulting to start (DEPRECATED: Future versions will require a subcommand)
+daos_server logging to file /tmp/daos_server.log
+DEBUG 14:10:25.811453 start.go:147: Switching control log level to DEBUG
+DEBUG 14:10:25.811586 start.go:167: cfg: &server.Configuration{ControlPort:10001, TransportConfig:(*security.TransportConfig)(0xc00017acb0), Servers:[]*ioserver.Config{(*ioserver.Config)(0xc000084780)}, BdevInclude:[]string(nil), BdevExclude:[]string(nil), NrHugepages:1024, ControlLogMask:3, ControlLogFile:"/tmp/daos_server.log", ControlLogJSON:false, UserName:"", GroupName:"", SystemName:"daos_server", SocketDir:"/var/run/daos_server", Fabric:ioserver.FabricConfig{Provider:"ofi+sockets", Interface:"", InterfacePort:0}, Modules:"", Attach:"/tmp", AccessPoints:[]string{"localhost"}, FaultPath:"", FaultCb:"", Hyperthreads:false, Path:"/home/spoussa/src/daos-config/daos_server_wolfpass4.yaml", ext:(*server.ext)(0xc00015a820), NvmeShmID:1248997051}
+DEBUG 14:10:25.812066 server.go:61: Active config saved to /home/spoussa/src/daos-config/.daos_server.active.yml (read-only)
+Starting SPDK v18.07-pre / DPDK 18.02.0 initialization...
+[ DPDK EAL parameters: spdk -c 0x1 --file-prefix=spdk1248997051 --base-virtaddr=0x200000000000 --proc-type=auto ]
+EAL: Detected 72 lcore(s)
+EAL: Auto-detected process type: PRIMARY
+EAL: No free hugepages reported in hugepages-1048576kB
+EAL: Multi-process socket /var/run/.spdk1248997051_unix
+EAL: Probing VFIO support...
+EAL: VFIO support initialized
+EAL: PCI device 0000:5e:00.0 on NUMA socket 0
+EAL:   probe driver: 8086:2701 spdk_nvme
+EAL:   using IOMMU type 1 (Type 1)
+EAL: PCI device 0000:5f:00.0 on NUMA socket 0
+EAL:   probe driver: 8086:a54 spdk_nvme
+DAOS control server listening on 0.0.0.0:10001
+Waiting for I/O server instance storage to be ready...
+DEBUG 14:10:27.439929 harness.go:163: /mnt/daos: checking formatting
+DEBUG 14:10:27.439954 external.go:163: check if dir /mnt/daos is mounted
+DEBUG 14:10:27.439973 external.go:163: check if dir /mnt/daos is mounted
+DEBUG 14:10:27.440006 instance.go:185: attempting to mount existing SCM dir /mnt/daos
+DEBUG 14:10:27.440035 instance.go:185: mounting scm /dev/pmem1 at /mnt/daos (ext4)...
+DEBUG 14:10:27.440057 external.go:147: syscall: mount /dev/pmem1, /mnt/daos, ext4, 0, dax
+DEBUG 14:10:27.455038 harness.go:169: /mnt/daos: checking superblock
+DEBUG 14:10:27.455072 external.go:163: check if dir /mnt/daos is mounted
+DEBUG 14:10:27.455093 superblock.go:177: /mnt/daos already mounted
+DEBUG 14:10:27.455150 harness.go:169: /mnt/daos: needs superblock (doesn't exist)
+DEBUG 14:11:03.999596 ctl_storage_rpc.go:169: /mnt/daos: checking superblock
+DEBUG 14:11:03.999676 external.go:163: check if dir /mnt/daos is mounted
+DEBUG 14:11:03.999734 superblock.go:177: /mnt/daos already mounted
+DEBUG 14:11:03.999797 ctl_storage_rpc.go:169: /mnt/daos: needs superblock (doesn't exist)
+DEBUG 14:11:03.999829 ctl_storage_rpc.go:184: performing device format on NVMe controllers
+DEBUG 14:11:03.999853 ctl_storage_rpc.go:184: formatting nvme controller at 0000:5e:00.0, may take several minutes!...
+nvme_ctrlr.c: 710:spdk_nvme_ctrlr_reset: *NOTICE*: resetting controller
+Formatted NVMe Controller:       0000:5e:00.00
+DEBUG 14:17:46.059740 ctl_storage_rpc.go:184: controller format successful (0000:5e:00.0)
+DEBUG 14:17:46.059776 ctl_storage_rpc.go:184: device format on NVMe controllers completed
+DEBUG 14:17:46.059787 ctl_storage_rpc.go:188: performing SCM device reset, format and mount
+DEBUG 14:17:46.059798 external.go:187: syscall: calling unmount with /mnt/daos, MNT_DETACH
+DEBUG 14:17:46.060733 external.go:218: os: removeall /mnt/daos
+DEBUG 14:17:46.060790 ctl_storage_rpc.go:188: formatting scm device /dev/pmem1, should be quick!...
+DEBUG 14:17:46.060801 storage_scm.go:266: wiping all fs identifiers on device /dev/pmem1
+DEBUG 14:17:46.060812 file_utils.go:236: exec 'wipefs -a /dev/pmem1'
+DEBUG 14:17:46.066217 file_utils.go:236: exec 'mkfs.ext4 /dev/pmem1'
+DEBUG 14:17:46.893086 ctl_storage_rpc.go:188: scm format complete.
+DEBUG 14:17:46.893143 ctl_storage_rpc.go:188: mounting scm device /dev/pmem1 at /mnt/daos (ext4)...
+DEBUG 14:17:46.893151 external.go:207: os: mkdirall /mnt/daos, 0777
+DEBUG 14:17:46.893240 external.go:147: syscall: mount /dev/pmem1, /mnt/daos, ext4, 0, dax
+DEBUG 14:17:46.900856 ctl_storage_rpc.go:188: scm mount complete.
+DEBUG 14:17:46.900885 ctl_storage_rpc.go:188: SCM device reset, format and mount completed
+DEBUG 14:17:46.900893 ctl_storage_rpc.go:219: storage format successful on server 0
+DEBUG 14:17:46.900900 ctl_storage_rpc.go:194: I/O server instance 0 notifying storage ready
+I/O server instance 0 storage ready
+DEBUG 14:17:46.901004 harness.go:117: /mnt/daos: checking superblock
+DEBUG 14:17:46.901020 external.go:163: check if dir /mnt/daos is mounted
+DEBUG 14:17:46.901045 superblock.go:177: /mnt/daos already mounted
+DEBUG 14:17:46.901098 harness.go:117: /mnt/daos: needs superblock (doesn't exist)
+DEBUG 14:17:46.902113 external.go:163: check if dir /mnt/daos is mounted
+DEBUG 14:17:46.902143 superblock.go:125: /mnt/daos already mounted
+DEBUG 14:17:46.903041 exec.go:124: daos_io_server:0 config: &ioserver.Config{Rank:(*ioserver.Rank)(nil), Modules:"", TargetCount:1, HelperStreamCount:1, ServiceThreadCore:1, SystemName:"daos_server", SocketDir:"/var/run/daos_server", AttachInfoPath:"/tmp", LogMask:"DEBUG", LogFile:"/tmp/daos_io_server.log", Storage:ioserver.StorageConfig{SCM:storage.ScmConfig{MountPoint:"/mnt/daos", Class:"dcpm", RamdiskSize:0, DeviceList:[]string{"/dev/pmem1"}}, Bdev:storage.BdevConfig{ConfigPath:"/mnt/daos/daos_nvme.conf", Class:"nvme", DeviceList:[]string{"0000:5e:00.0"}, DeviceCount:0, FileSize:0, ShmID:1248997051, VosEnv:"", Hostname:"wolfpass4"}}, Fabric:ioserver.FabricConfig{Provider:"ofi+sockets", Interface:"enp65s0f0", InterfacePort:31416}, EnvVars:[]string{"DAOS_MD_CAP=1024", "CRT_CTX_SHARE_ADDR=1", "CRT_TIMEOUT=30", "FI_SOCKETS_MAX_CONN_RETRY=1", "FI_SOCKETS_CONN_TIMEOUT=2000"}, Index:0}
+DEBUG 14:17:46.903082 exec.go:124: daos_io_server:0 args: [-t 1 -x 1 -f 1 -g daos_server -d /var/run/daos_server -a /tmp -s /mnt/daos -n /mnt/daos/daos_nvme.conf -i 1248997051]
+DEBUG 14:17:46.903095 exec.go:124: daos_io_server:0 env: [DAOS_MD_CAP=1024 CRT_CTX_SHARE_ADDR=1 D_LOG_MASK=DEBUG D_LOG_FILE=/tmp/daos_io_server.log OFI_INTERFACE=enp65s0f0 OFI_PORT=31416 CRT_TIMEOUT=30 FI_SOCKETS_MAX_CONN_RETRY=1 FI_SOCKETS_CONN_TIMEOUT=2000 CRT_PHY_ADDR_STR=ofi+sockets]
+Starting I/O server instance 0: /opt/src/daos-stack/daos/install/bin/daos_io_server
+ERROR: daos_io_server:0 EAL: Detected 72 lcore(s)
+EAL: Auto-detected process type: SECONDARY
+daos_io_server:0 Starting SPDK v18.07-pre / DPDK 18.02.0 initialization...
+[ DPDK EAL parameters: daos -c 0x1 --file-prefix=spdk1248997051 --base-virtaddr=0x200000000000 --proc-type=auto ]
+daos_io_server:0 EAL: Multi-process socket /var/run/.spdk1248997051_unix_31856_2f5a633c91d10
+daos_io_server:0 EAL: Probing VFIO support...
+daos_io_server:0 EAL: VFIO support initialized
+daos_io_server:0 EAL: WARNING: Address Space Layout Randomization (ASLR) is enabled in the kernel.
+daos_io_server:0 EAL:    This may cause issues with mapping memory into secondary processes
+daos_io_server:0 EAL: PCI device 0000:5e:00.0 on NUMA socket 0
+daos_io_server:0 EAL:   probe driver: 8086:2701 spdk_nvme
+daos_io_server:0 EAL: PCI device 0000:5f:00.0 on NUMA socket 0
+daos_io_server:0 EAL:   probe driver: 8086:a54 spdk_nvme
+DEBUG 14:17:47.811374 mgmt_drpc.go:100: I/O server instance 0 ready: uri:"ofi+sockets://10.237.71.93:31416" nctxs:3
+DEBUG 14:17:47.811521 harness.go:250: create MS (bootstrap=true)
+DEBUG 14:17:49.906475 instance.go:336: start MS
+Management Service access point started (bootstrapped)
+daos_io_server:0 DAOS I/O server (v0.6.0) process 31856 started on rank 0 (out of 1) with 1 target xstream set(s), 1 helper XS per target, firstcore 1.

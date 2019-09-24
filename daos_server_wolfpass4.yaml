@@ -1,0 +1,31 @@
+name: daos_server
+port: 10001
+provider: ofi+sockets
+socket_dir: /var/run/daos_server
+nr_hugepages: 1024
+control_log_mask: DEBUG
+control_log_file: /tmp/daos_server.log
+#user_name: spoussa
+servers:
+-
+  targets: 8
+  first_core: 1
+  nr_xs_helpers: 1
+  fabric_iface: enp65s0f0
+  fabric_iface_port: 31416
+  log_mask: DEBUG
+  log_file: /tmp/daos_io_server.log
+  env_vars:
+  - DAOS_MD_CAP=1024
+  - CRT_CTX_SHARE_ADDR=1
+  - CRT_TIMEOUT=30
+  - FI_SOCKETS_MAX_CONN_RETRY=1
+  - FI_SOCKETS_CONN_TIMEOUT=2000
+
+  scm_mount: /mnt/daos
+  
+  scm_class: dcpm
+  scm_list: [/dev/pmem1]
+
+  bdev_class: nvme
+  bdev_list: ["0000:5e:00.0"]
